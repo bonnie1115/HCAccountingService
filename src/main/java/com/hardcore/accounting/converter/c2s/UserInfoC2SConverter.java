@@ -7,12 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-public class UserInfoConverter extends Converter<UserInfo, com.hardcore.accounting.model.service.UserInfo> {
+public class UserInfoC2SConverter extends Converter<UserInfo, com.hardcore.accounting.model.service.UserInfo> {
     @Override
     protected com.hardcore.accounting.model.service.UserInfo doForward(UserInfo userInfo) {
         return com.hardcore.accounting.model.service.UserInfo.builder()
                 .id(userInfo.getId())
                 .username(userInfo.getUsername())
+                .password(userInfo.getPassword())
                 .build();//????这是在干嘛？？
 
 

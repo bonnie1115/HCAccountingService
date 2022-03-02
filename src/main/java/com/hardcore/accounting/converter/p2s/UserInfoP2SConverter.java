@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component       //?
 @NoArgsConstructor  //???不需要构造参数构造器 做converter的时候不要调用服务，不要调用操作数据库之类，这里单纯做数据转换
-public class UserInfoConverter extends Converter<UserInfo, com.hardcore.accounting.model.common.UserInfo> {
+public class UserInfoP2SConverter extends Converter<UserInfo, com.hardcore.accounting.model.common.UserInfo> {
 
     @Override
     protected com.hardcore.accounting.model.common.UserInfo doForward(UserInfo userInfo) {
