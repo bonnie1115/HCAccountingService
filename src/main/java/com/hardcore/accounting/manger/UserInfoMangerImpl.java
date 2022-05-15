@@ -2,10 +2,13 @@ package com.hardcore.accounting.manger;
 
 import com.hardcore.accounting.converter.p2s.UserInfoP2SConverter;
 import com.hardcore.accounting.dao.UserInfoDAO;
+import com.hardcore.accounting.exception.ResourceNotFoundException;
 import com.hardcore.accounting.model.common.UserInfo;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class UserInfoMangerImpl implements UserInfoManger {
@@ -26,8 +29,11 @@ public class UserInfoMangerImpl implements UserInfoManger {
 
     @Override //p转换成c
     public UserInfo getUserInfoByUserId(Long userId){
-        val userInfo= userInfoDAO.getUserInfoById(userId);
-
+        //val userInfo= userInfoDAO.getUserInfoById(userId);
+        val userInfo = Optional.ofNullable(userInfoDAO.getUserInfoById(userId))
+                                         .orElseThrow(() -> new ResourceNotFoundException(
+                                String.format("user %s not found",userId)
+                ));
         return  userInfoP2SConverter.convert(userInfo);
         //又要从common转换成Dao层怎么操作？
 
